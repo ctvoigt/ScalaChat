@@ -19,10 +19,20 @@ import org.scalaquery.ql.extended.H2Driver.Implicit._
 import org.scalaquery.ql.extended.{ExtendedTable => Table}
 
 object DB {
-  val Messages = new Table[(Int, Int,  String, String)]("SUPPLIERS") {
-    def id = column[Int]("ID", O.PrimaryKey) // This is the primary key column
+  val User = new Table[(Int, String, String)]("USERS") {
+    def id = column[Int]("ID", O.PrimaryKey)
 
-    def conversationId = column[Int]("CONVERSATION_ID")
+    def username = column[String]("USERNAME")
+
+    def password = column[String]("PASSWORD")
+
+    def * = id ~ username ~ password
+  }
+
+  val Messages = new Table[(Int, Int, String, String)]("MESSAGES") {
+    def id = column[Int]("ID", O.PrimaryKey)
+
+    def userId = column[Int]("USER_ID")
 
     def sender = column[String]("SENDER")
 

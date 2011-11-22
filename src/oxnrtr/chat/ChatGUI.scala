@@ -12,7 +12,7 @@ object ChatGUI extends SimpleSwingApplication {
   val localPort = 2222
 
   val remoteActor = Actor.remote.start(localIp, localPort)
-  Actor.remote.register("chat", Actor.actorOf(new ChatPeer(localName, localIp, localPort)))
+  Actor.remote.register("chat", Actor.actorOf(ChatPeer(localName, localIp, localPort)))
 
   val myActor = Actor.remote.actorFor("chat", localIp, localPort)
 
